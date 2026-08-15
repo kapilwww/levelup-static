@@ -1,20 +1,66 @@
-# Simple Docker Compose for Nginx
+# Docker Compose Setup
 
-This composes an `nginx:alpine` service serving the `levelup` folder and using the local `nginx/nginx.conf`.
+This project uses Docker Compose to run two separate Nginx-based services:
 
-Run:
+- `levelup` on port `9090` -> container port `9000`
+- `gym-fitness` on port `8080` -> container port `8000`
+
+Each service uses a custom image and mounts its own default Nginx config from the `nginx-conf` directory.
+
+
+## Start the stack
 
 ```sh
 docker compose up -d
-# or 
-docker compose -f docker-compose.yml up -d
+```
+LEVELUP
+To build containers after code changes:
 
+
+```sh
+docker build -t levelup:v0002 -f Dockerfile.levelup .  
 ```
 
-Stop and remove:
+GYM FITNESS
+To build containers after code changes:
+
+
+```sh
+docker build -t gym-fitness:v0001 -f Dockerfile.fitness .  
+```
+
+## Stop the stack
 
 ```sh
 docker compose down
 ```
 
-Open http://localhost:8080 in your browser.
+## View logs
+
+```sh
+docker compose logs -f
+```
+
+## Check running containers
+
+```sh
+docker ps
+```
+
+## Access the apps
+
+- Levelup app: http://localhost:9090
+- Gym Fitness app: http://localhost:8080
+
+## Notes
+
+- The config files are mounted read-only into each container.
+- If you change the Nginx config files in `nginx-conf`, restart the relevant service:
+
+```sh
+docker compose restart levelup
+docker compose restart gym-fitness
+
+docker compose down levelup
+docker compose down gym-fitness
+```
