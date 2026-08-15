@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  levelup:
+    image: levelup:v0002
+    container_name: levelup-nginx
+    ports:
+      - "9090:9000"
+    volumes:
+      - ./nginx-conf/default-levelup.conf:/etc/nginx/conf.d/default.conf:ro
+    restart: unless-stopped
+    networks:
+      - common-network
+  gym-fitness:
+    image: gym-fitness:v0001
+    container_name: gym-fitness-nginx
+    ports:
+      - "8080:8000"
+    volumes:
+      - ./nginx-conf/default-fitness.conf:/etc/nginx/conf.d/default.conf:ro
+    restart: unless-stopped
+    networks:
+      - common-network
+
+
+networks:
+  common-network:
+    driver: bridge
