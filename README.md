@@ -12,6 +12,9 @@ Each service uses a custom image and mounts its own default Nginx config from th
 
 ```sh
 docker compose up -d
+docker compose up -d levelup
+docker compose up -d gym-fitness
+docker compose up -d spa
 ```
 LEVELUP
 To build containers after code changes:
