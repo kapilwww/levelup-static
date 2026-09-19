@@ -13,7 +13,7 @@ Each service uses a custom image and mounts its own default Nginx config from th
 ```sh
 docker compose up -d
 docker compose up -d levelup
-docker compose up -d gym-fitness
+docker compose up -d gym-fitnesssparlex:v001             7be66fc6a588       65.4MB             0B        
 docker compose up -d spa
 ```
 LEVELUP
